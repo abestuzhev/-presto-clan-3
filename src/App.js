@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import Wrapper from './hoc/Wrapper';
+import './scss/style.scss';
+import SlideGift from './components/SlideGift/SlideGift';
+import Header from './components/Header/Header';
+import Rules from './components/Rules/Rules';
+import Footer from './components/Footer/Footer';
+import GameSlide from './components/GameSlide/GameSlide';
+import SlideAction from './components/SlideAction/SlideAction';
+import SlideInstruction from './components/SlideInstruction/SlideInstruction';
+import GameInfo from './components/GameInfo/GameInfo';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <div className="wrapper">
+        <Header />    
+        <SlideGift />        
+        <Rules />
+        {/* <GameSlide/>
+        <GameInfo/>
+        
+        <SlideAction />
+        <Wrapper>
+          <SlideInstruction/>
+        </Wrapper> */}
+
+        <Footer/>
+      </div> 
+        
     </div>
   );
 }
