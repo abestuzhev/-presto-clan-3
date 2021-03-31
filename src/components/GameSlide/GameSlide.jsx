@@ -1,4 +1,3 @@
-import react from "react";
 import Wrapper from "../../hoc/Wrapper";
 import imgPerson1 from "../../img/card-person-1.jpg"
 

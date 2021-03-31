@@ -1,5 +1,6 @@
 import React from "react";
 import Wrapper from "../../hoc/Wrapper";
+import stockPositionPDF from "../../doc/stock-position-2.0.pdf"
 
 const Footer = () => {
     return (
@@ -10,7 +11,7 @@ const Footer = () => {
                         <div className="footer-copyright">© 2021 Пиццерия Престо™ Все права защищены</div>                        
                     </div>
                     <div className="c-grid-col">
-                        {/* <a href="./doc/Uslovia_provedenia_aktsii_Klan_Presto.pdf" className="c-link" target="_blank" class="c-link">Положение акции</a> */}
+                         <a href={stockPositionPDF} className="c-link" target="_blank" >Положение акции</a>
                     </div>
                 </div>
             </Wrapper>

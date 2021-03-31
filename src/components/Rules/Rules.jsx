@@ -3,6 +3,7 @@ import Wrapper from "../../hoc/Wrapper";
 import icon1 from "../../img/icon-1.svg";
 import icon2 from "../../img/icon-2.svg";
 import icon3 from "../../img/icon-3.svg";
+import stockPositionPDF from "../../doc/stock-position-2.0.pdf";
 
 
 const Rules = (props) => {
@@ -57,8 +58,8 @@ const Rules = (props) => {
                 
                 <div className="c-text">
                     Не пропустите подведение итогов, которое будет проходить в онлайн-режиме 
-                    в группе <a href="https://vk.com/pizzapresto">вКонтакте </a>. С более подробными условиями акции и механикой проведения розыгрышей 
-                    можно ознакомиться в положении акции.                     
+                    в группе <a className="c-link" href="https://vk.com/pizzapresto">вКонтакте </a>. С более подробными условиями акции и механикой проведения розыгрышей
+                    можно ознакомиться в <a href={stockPositionPDF} className="c-link" target="_blank" className="c-link">положение акции</a>.
                 </div>
 
             </Wrapper>
