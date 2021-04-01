@@ -13,11 +13,11 @@ const Header = (props) => {
                         <Link to="/" className="header-logo">Клан Престо</Link>
                     </div>
                     <div className="header-col">
-                        <nav className="header-menu">
+                        {/* <nav className="header-menu">
                             <Link to="#regulations" className="c-btn medium c-btn--default c-btn--text">Правила участия</Link>
                             <Link to="#game" className="c-btn medium c-btn--default c-btn--text">Игра «Мафия»</Link>
-                        </nav>
-                        <Link to="/add" className="c-btn medium c-btn--primary">Зарегистрировать чек</Link>
+                        </nav> */}
+                        <Link to="/add/step-1" className="c-btn medium c-btn--primary">Добавить чек</Link>
                     </div>
                 </div>
             </Wrapper>

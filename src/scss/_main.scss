@@ -71,6 +71,12 @@
     }
 }
 
+.confirmation {
+    // .c-btn {
+    //     margin-right: 10px;
+    // }
+}
+
 .gift {
     background: rgb(189,52,123);
     // background: linear-gradient(0deg, rgba(189,52,123,1) 0%, rgba(220,105,167,1) 35%, #fffafd 100%);
@@ -166,6 +172,13 @@
     .c-btn-layout {
         position: relative;
         z-index: 10;
+    }
+
+    .c-btn {
+        @media (max-width: 480px) {
+            width: 100%;
+            text-align: center;
+        }
     }
 
 
@@ -374,4 +387,67 @@
 
 .action {
     background-color: #eee;
+}
+
+.success {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0 16px;
+    
+    &.is-show {
+        transition: all .5s ease-in-out;
+    }
+
+    &-icon {
+        width: 160px;
+        height: 160px;
+        border-radius: 160px;
+        background-color: #2fc158;
+        margin-bottom: 40px;
+        position: relative;
+        transform: scale(1);
+        animation: a-checkmark .3s ease-in-out;
+
+        &::after {
+            opacity: 1;
+            height: 4em;
+            width: 1.9em;
+            transform-origin: left top;
+            border-right: 10px solid #fff;
+            border-top: 10px solid #fff;
+            content: "";
+            left: 45px;
+            top: 50%;
+            position: absolute;
+            transform: scaleX(-1) rotate(135deg);
+        }
+    }
+
+    &-body {
+
+    }
+
+    &-text {
+        padding: 0 13%;
+        font-size: 16px;
+        line-height: 1.4;
+        color: #8b8b8b;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .c-btn {
+        color: #8b8b8b;
+        border-color: #8b8b8b;
+
+        &:hover {
+            background-color: #2fc158;
+            border-color: #2fc158;
+            color: #fff;
+        }
+    }
+    
 }

@@ -405,17 +405,36 @@
     box-sizing: border-box;
     padding: 30px;
 
+    
+
     &__body {
         margin-bottom: 30px;
     }
 
+    @media (max-width: 480px) {
+        padding: 16px; 
+    } 
+
     &--small {
         width: 510px;
         padding: 40px;
+
+        @media (max-width: 580px) {
+            padding: 0; 
+            border-radius: 0;
+        }
     }
 
-    &--big {
+    &--large {
         width: 710px;
+
+        @media (max-width: 850px) {
+            width: 100%;
+        }
+
+        @media (max-width: 580px) {
+            border-radius: 0;
+        }
     }
 
     &-component {
@@ -439,6 +458,14 @@
         display: flex;
         flex-flow: column;
         min-height: 100%;
+
+        @media (max-width: 850px) {
+            width: 100%;
+        }
+
+        @media (max-width: 580px) {
+            padding: 0; 
+        }
 
         &::before,
         &::after {
@@ -465,6 +492,23 @@
         right: -38px;
         cursor: pointer;
         transition: transform 0.1s ease-in-out 0s;
+
+        @media (max-width: 850px) {
+            right: 13px;
+            background-color: #eaecef;
+            background-color: #E50E89;
+            padding: 10px;
+            border-radius: 50px;
+
+            svg {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            top: 16px;
+        }
 
         &:hover {
             transform: scale(1.11);
@@ -515,6 +559,42 @@
         font-size: 18px;
         margin-bottom: 10px;
     }
+
+    &--success {
+
+    }
+
+    .c-grid {
+        @media (max-width: 580px) {
+            flex-flow: column wrap;
+        } 
+
+        &-col {
+            @media (max-width: 580px) {
+                width: 100%;
+
+                &:nth-child(1) {
+                    order: 2;
+                }
+                
+                &:nth-child(2) {
+                    order: 1;
+                }
+            }
+
+            
+
+             
+        }
+    }
+
+    .c-title {
+        @media (max-width: 480px) {
+            font-size: 38px; 
+        } 
+    }
+
+    
 }
 
 
@@ -530,20 +610,10 @@
     &-box {
         margin-bottom: 10px;
         position: relative;
-
-
-        // .c-label {
-        //   position: absolute;
-        //   top: 50%;
-        //   left: 10px;
-        //   transform: translateY(-50%);
-        // }
     }
 
     &__item {
-        margin-bottom: 30px;
-        // background-color: #f6f8fa;
-        // border: 1px solid #eaecef;
+        margin-bottom: 26px;
         position: relative;
     }
 
@@ -566,10 +636,31 @@
     &-error {
         position: absolute;
         left: 0;
-        bottom: -17px;
+        bottom: -15px;
         color: #9c0e03;
-        font-size: 14px;
+        font-size: 13px;
         line-height: 1em;
+    }
+
+    &-img {
+        margin-bottom: 16px;
+        @media (max-width: 580px) {
+            position: relative;
+            height: 100px;
+            overflow: hidden;
+            border: 2px solid #ffa8da;
+            border-radius: 6px;
+
+            img {
+                position: absolute;
+                top: -37vw;
+            }
+        }
+        img {
+            width: 100%;
+            height: auto;
+        }
+        
     }
 }
 
@@ -577,7 +668,7 @@
     display: block;
     margin-bottom: 7px;
     font-weight: 500;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     font-size: 16px;
 }
 
@@ -654,9 +745,35 @@
 
 
 
+
+.success-icon::after {
+    opacity: 1;
+    height: 4em;
+    width: 1.9em;
+    transform-origin: left top;
+    border-right: 10px solid #fff;
+    border-top: 10px solid #fff;
+    content: "";
+    left: 45px;
+    top: 50%;
+    position: absolute;
+    transform: scaleX(-1) rotate(135deg);
+}
+
+@keyframes a-checkmark {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+
 @keyframes floating {
     0% { transform: translate(0,  0px); }
-    50%  { transform: translate(0, 10px); }
+    50%  { transform: translate(0, 18px); }
     100%   { transform: translate(0, -0px); }    
 }
   
