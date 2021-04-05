@@ -4,10 +4,6 @@
     max-width: 1060px;
 }
 
-.c-link {
-    text-decoration: none;
-    color: #ff2a2a;
-}
 
 //.c-modal {
 //    width: 500px;
@@ -154,10 +150,19 @@
 
         p {
             padding: 14px 14px;
-            background: rgba(255, 255, 255, .75);;
+            background: rgba(255, 255, 255, .75);
             color: #9c11a5;
             border-radius: 10px;
+            &:nth-child(odd) {
+                border-radius: 20px 20px 20px 0px;
+            }
+    
+            &:nth-child(even) {
+                border-radius: 20px 20px 0 20px;
+            }
         }
+
+        
 
         &-introduction {
             letter-spacing: -.5px;
@@ -406,7 +411,7 @@
         height: 160px;
         border-radius: 160px;
         background-color: #2fc158;
-        margin-bottom: 40px;
+        margin-bottom: 20px;
         position: relative;
         transform: scale(1);
         animation: a-checkmark .3s ease-in-out;
@@ -440,8 +445,9 @@
     }
     
     .c-btn {
-        color: #8b8b8b;
-        border-color: #8b8b8b;
+        color: #fff;
+        background-color: #2fc158;
+        border-color: #2fc158;
 
         &:hover {
             background-color: #2fc158;
@@ -450,4 +456,10 @@
         }
     }
     
+}
+
+.error {
+    &-text {
+        margin-bottom: 20px;
+    }
 }

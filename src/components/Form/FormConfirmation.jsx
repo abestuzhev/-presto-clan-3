@@ -8,26 +8,18 @@ export const FormConfirmation = () => {
     const {data, setValues} = useData();
     const {register, handleSubmit, errors, clearErrors, } = useForm({
         mode: 'all',
-        // defaultValues: {userConfirmation: data.smsCode}
     });
 
     const onSubmit = (values) => {
-        // console.log("data", data);
-        // console.log("dataConfirmation", values.userConfirmation);
-        // console.log("dataConfirmationType", typeof values.userConfirmation);
         
         if(Number(values.userConfirmation) === data.smsCode){
             api.addUser(data).then( res => {
                 if(res){
                     history.push('/add/success');
-                }else {
-                    console.log("error addUser");
-                }
-                
+                }             
             });
             
         }else {
-            // console.log(values.userConfirmation);
             history.push('/add/error');
         }
     }

@@ -18,7 +18,7 @@ const Rules = (props) => {
                     <div className="c-grid c-grid--around">
                         <div className="c-grid-col c-grid-col-4">
                             <div className="c-card-advantage vertically">
-                                <div className="c-card-advantage__pic">
+                                <div className="c-card-advantage__pic s-border-radius-1">
                                 <img src={icon1} alt=""/>
                                 </div>
                                 <div className="c-card-advantage__body">
@@ -30,7 +30,7 @@ const Rules = (props) => {
                         </div>                        
                         <div className="c-grid-col c-grid-col-4">
                             <div className="c-card-advantage vertically">
-                                <div className="c-card-advantage__pic">
+                                <div className="c-card-advantage__pic s-border-radius-2">
                                     <img src={icon2} alt=""/>
                                 </div>
                                 <div className="c-card-advantage__body">
@@ -42,7 +42,7 @@ const Rules = (props) => {
                         </div>
                         <div className="c-grid-col c-grid-col-4">
                             <div className="c-card-advantage vertically">
-                                <div className="c-card-advantage__pic">
+                                <div className="c-card-advantage__pic s-border-radius-3">
                                 <img src={icon3} alt=""/>
                                 </div>
                                 <div className="c-card-advantage__body">

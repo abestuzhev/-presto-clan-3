@@ -14,31 +14,77 @@ import { generateCode } from "../../utils";
 const FormAdd = () => {
     const history = useHistory();
     const {data, setValues} = useData();
+
+    const masks = {
+        
+        code: {
+            mask: (value) => {
+                const mask = IMask.createPipe({
+                    mask: '000000'
+                }
+            );
+
+            return mask(value);
+            }
+        }, 
+
+        phoneNumber: {
+            unmask: (value) => {
+                const mask = IMask.createPipe({
+                        mask: '+{7} (000) 000-00-00'
+                    },
+                    IMask.PIPE_TYPE.MASKED,
+                    IMask.PIPE_TYPE.UNMASKED
+                );
+    
+                return mask(value);
+            },
+    
+            mask: (value) => {
+                const mask = IMask.createPipe({
+                        mask: '+{7} (000) 000-00-00',
+                        // lazy: false,
+                    },
+                    // IMask.PIPE_TYPE.UNMASKED,
+                    IMask.PIPE_TYPE.MASKED
+                );
+    
+                return mask(value);
+            }
+        } 
+
+        
+        
+    }
     // const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
     const schema = yup.object().shape({
         userName: yup.string().matches(/^([^0-9]*)$/, "В поле не должно быть цифр").required("Заполните имя").max(20, "Имя слишком длинное").min(3, "Имя слишком короткое"),
-        userPhone: yup.string().required("Введите номер телефона"),
+        userPhone: yup.string().transform( value => {            
+            return masks.phoneNumber.unmask(value);
+        }).min(11, "Телефон слишком короткий")
+        .required("Введите номер телефона"),
         userNumber: yup
-        .number()
+        .string()
+        .min(5, "Номер чека слишком короткий")
+        .max(6, "Номер чека слишком длинный")
         .typeError('Введите номер чека')
         .required("Введите номер чека")
-        .positive("Только положительное число")
     });
 
     const {register, handleSubmit, errors, clearErrors, control} = useForm({
-        mode: 'all',
+        mode: 'onBlur',
         // defaultValues: {userName: "User", userPhone:"79506602664", userNumber: "00000" },
         resolver: yupResolver(schema)
     });
     const smsCode = generateCode();
     const onSubmit = values => {
+        // console.log("onSubmit", values);
         setValues({user: values, smsCode: smsCode});       
 
         //отправка кода SMS
         api.sendSms(values.userPhone, smsCode).then( res => {
             if(res) {
-                // console.log("sendSms", res);
                 history.push('/add/step-2');
             }else {
                 history.push('/add/error');
@@ -47,16 +93,13 @@ const FormAdd = () => {
     }
 
     const normalizePhoneNumber = (value) => {
+
         
-        const phoneNumber = parsePhoneNumberFromString(value, 'RU')
-        if (!phoneNumber) {
-            return value;
-        }
-        return phoneNumber.formatInternational();
+        return masks.phoneNumber.mask(value);
         // return value.replace(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im, "")
     }
     const normalizeCheckNumber = (value) => {
-
+        return masks.code.mask(value);
     }
 
     return (
@@ -84,7 +127,8 @@ const FormAdd = () => {
                             inputMode="numeric"
                             className={errors.userPhone ? "c-input error" : "c-input"}
                             name="userPhone"
-                            onChange={(event) => {
+                            placeholder="+7 (___) ___-__-__"
+                            onChange={event => {
                                 event.target.value = normalizePhoneNumber(event.target.value);
                             }}
                         />
@@ -111,10 +155,9 @@ const FormAdd = () => {
                             inputMode="numeric"
                             className={errors.userNumber ? "c-input error" : "c-input"}
                             name="userNumber"
-                            // onChange={(event) => {
-                            //     let {value} = event.target;
-                            //     event.target.value = normalizeCheckNumber(value);
-                            // }}
+                            onChange={event => {
+                                event.target.value = normalizeCheckNumber(event.target.value);
+                            }}
                         />
                         {/* <Controller
                             as={InputMask}
@@ -124,6 +167,11 @@ const FormAdd = () => {
                             defaultValue="000000"
                         /> */}
                         {errors.userNumber && <span className="c-form-error">{errors?.userNumber?.message}</span>}
+                    </div>
+                    <div className="c-form__item">
+                    <div className="c-form-policy">
+                        Согласен с условиями <a className="c-link" href="https://pizzapresto.ru/confidentiality/" target="_blank">обработки персональных данных</a> и правилами розыгрыша.
+                    </div>
                     </div>
                     <div className="c-form__item">
                         <div className="c-btn-layout">

@@ -37,7 +37,7 @@ function App() {
                     children={({match}) => {
                         return (
                             Boolean(match) &&
-                            <Modal history={history}>
+                            <Modal history={history} size="large">
                                 <FormAdd/>
                             </Modal>
                         )
@@ -50,7 +50,7 @@ function App() {
                     children={({match}) => {
                         return (
                             Boolean(match) &&
-                            <Modal history={history}>
+                            <Modal history={history} size="small">
                                 <FormConfirmation/>
                             </Modal>
                         )
@@ -61,7 +61,7 @@ function App() {
                     children={({match}) => {
                         return (
                             Boolean(match) &&
-                            <Modal history={history} closeBtn={false}>
+                            <Modal history={history} size="small" closeBtn={false}>
                                 <ModalSuccess/>
                             </Modal>
                         )
@@ -74,7 +74,7 @@ function App() {
                     children={({match}) => {
                         return (
                             Boolean(match) &&
-                            <Modal history={history} closeBtn={false}>
+                            <Modal history={history} size="small" closeBtn={false}>
                                 <ModalError/>
                             </Modal>
                         )
