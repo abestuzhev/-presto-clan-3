@@ -111,10 +111,18 @@ const FormAdd = () => {
 
         //Отправка звонка
         api.initCall(values.userPhone, values.userName, smsCode).then( res => {
-            const response = JSON.parse(res)
+            // const response = JSON.parse(res)
             setIsLoading(false)
-            response.status ? history.push('/add/step-2') : history.push('/add/error');
+            res.status ? history.push('/add/step-2') : history.push('/add/error');
         });
+
+        //Повтор звонка
+        // api.initRepeat(values.userPhone, values.userName, smsCode).then( res => {
+        //     console.log("res", res)
+        //     // const response = JSON.parse(res)
+        //     setIsLoading(false)
+        //     // response.status ? history.push('/add/step-2') : history.push('/add/error');
+        // });
 
         //отправка кода SMS
         // api.sendSms(values.userPhone, smsCode).then( res => {

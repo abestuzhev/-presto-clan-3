@@ -20,17 +20,6 @@ export const api = {
                 return res.data;
             });
 
-            // return axios.get("https://api.ucaller.ru/v1.0/initCall?phone=79506602664&code=9999&client=%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B5%D0%B9&voice=false&key=HOoDBYrZ212hghM8moGeCvfyat4dxb2z&service_id=871584")
-            // const response = await axios.post("https://api.ucaller.ru/v1.0/initCall", {
-            //     phone: Number(phone), // 79001000010
-            //     code: code,
-            //     client: name,
-            //     voice: true
-            // }, {
-            //     headers: {'X-Requested-With': 'XMLHttpRequest'},
-            //     Authorization: "Bearer HOoDBYrZ212hghM8moGeCvfyat4dxb2z.871584"
-            // })
-
             // response structure{
             //     "status": true,
             //         "ucaller_id": 21046728,
@@ -39,7 +28,34 @@ export const api = {
             //         "client": "Алексей"
             // }
 
-            // return response.data;
+        }catch(e) {
+            console.error(e)
+        }
+
+    },
+
+    initRepeat: async (uid) => {
+
+        try {
+
+            let formData = new FormData();
+            formData.append("uid", uid);
+
+            return instance.post('/initRepeat/', formData).then(res => {
+                return res.data;
+            });
+
+
+            // {
+            //     "status": true,
+            //     "ucaller_id": 103000,
+            //     "phone": "7900***1010",
+            //     "code": "1000",
+            //     "client": "nickname",
+            //     "unique_request_id": "f32d7ab0-2695-44ee-a20c-a34262a06b90",
+            //     "exists": true,
+            //     "free_repeated": true
+            // }
 
         }catch(e) {
             console.error(e)
