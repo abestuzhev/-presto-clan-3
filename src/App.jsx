@@ -1,13 +1,7 @@
 import Wrapper from './hoc/Wrapper';
 import './scss/style.scss';
-import SlideGift from './components/SlideGift/SlideGift';
-import Header from './components/Header/Header';
-import Rules from './components/Rules/Rules';
-import Footer from './components/Footer/Footer';
-import GameSlide from './components/GameSlide/GameSlide';
-import SlideAction from './components/SlideAction/SlideAction';
-import SlideInstruction from './components/SlideInstruction/SlideInstruction';
-import GameInfo from './components/GameInfo/GameInfo';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import FormAdd from "./components/Form/FormAdd";
 import React from "react";
 import Modal from "./components/Modal/Modal";
@@ -15,6 +9,7 @@ import ModalError from "./components/Modal/ModalError";
 import ModalSuccess from "./components/Modal/ModalSuccess";
 import {Route, useRouteMatch, useHistory} from "react-router-dom";
 import { FormConfirmation } from './components/Form/FormConfirmation';
+import Home from "./components/Home";
 
 function App() {
     const match = useRouteMatch("/add");
@@ -24,8 +19,9 @@ function App() {
         <div className="app">
             <div className="wrapper">
                 <Header/>
-                <SlideGift/>
-                <Rules/>
+                <Home />
+                {/*<SlideGift/>*/}
+                {/*<Rules/>*/}
                 {/* <GameSlide/> */}
                 {/* <GameInfo/> */}
                 {/* <SlideAction/>
@@ -37,7 +33,7 @@ function App() {
                     children={({match}) => {
                         return (
                             Boolean(match) &&
-                            <Modal history={history} size="large">
+                            <Modal history={history} size="small">
                                 <FormAdd/>
                             </Modal>
                         )

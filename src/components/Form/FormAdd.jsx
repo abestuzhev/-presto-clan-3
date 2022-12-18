@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {useForm, Controller} from "react-hook-form";
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import { useHistory } from "react-router-dom";
@@ -10,18 +10,33 @@ import { useData } from "../../DataContext";
 import { api } from "../../api/api";
 import imgCashReceipt from "../../img/cash-receipt.jpg";
 import { generateCode } from "../../utils";
+import {convertDateToString} from "../../helpers/functions";
 
 const FormAdd = () => {
     const history = useHistory();
     const {data, setValues} = useData();
+    const [isLoading, setIsLoading] = useState(false)
 
     const masks = {
         
         code: {
+            unmask: (value) => {
+                const mask = IMask.createPipe({
+                        mask: '0-000-000'
+                    },
+                    IMask.PIPE_TYPE.MASKED,
+                    IMask.PIPE_TYPE.UNMASKED
+                );
+
+                return mask(value);
+            },
+
             mask: (value) => {
                 const mask = IMask.createPipe({
-                    mask: '000000'
-                }
+                    mask: '0-000-000'
+                },
+                IMask.PIPE_TYPE.MASKED,
+                // IMask.PIPE_TYPE.UNMASKED
             );
 
             return mask(value);
@@ -64,12 +79,13 @@ const FormAdd = () => {
             return masks.phoneNumber.unmask(value);
         }).min(11, "Телефон слишком короткий")
         .required("Введите номер телефона"),
-        userNumber: yup
-        .string()
-        .min(5, "Номер чека слишком короткий")
-        .max(6, "Номер чека слишком длинный")
-        .typeError('Введите номер чека')
-        .required("Введите номер чека")
+        userNumber: yup.string().transform( value => {
+            return masks.code.unmask(value);
+        })
+        .min(7, "Номер купона слишком короткий")
+        // .max(7, "Номер купона слишком длинный")
+        .typeError('Введите номер купона')
+        .required("Введите номер купона")
     });
 
     const {register, handleSubmit, errors, clearErrors, control} = useForm({
@@ -80,21 +96,37 @@ const FormAdd = () => {
     const smsCode = generateCode();
     const onSubmit = values => {
         // console.log("onSubmit", values);
-        setValues({user: values, smsCode: smsCode});       
+        setIsLoading(true)
+        setValues({
+            user: {...values,
+                userNumber: String(values.userNumber).replace(/-/g, ''),
+                date: convertDateToString(new Date())
+            },
+            smsCode: smsCode,
+        });
+
+        // console.log("userPhone", values.userPhone)
+        // console.log("values.userName", values.userName)
+        // console.log(smsCode, smsCode)
+
+        //Отправка звонка
+        api.initCall(values.userPhone, values.userName, smsCode).then( res => {
+            const response = JSON.parse(res)
+            setIsLoading(false)
+            response.status ? history.push('/add/step-2') : history.push('/add/error');
+        });
 
         //отправка кода SMS
-        api.sendSms(values.userPhone, smsCode).then( res => {
-            if(res) {
-                history.push('/add/step-2');
-            }else {
-                history.push('/add/error');
-            }
-        });
+        // api.sendSms(values.userPhone, smsCode).then( res => {
+        //     if(res) {
+        //         history.push('/add/step-2');
+        //     }else {
+        //         history.push('/add/error');
+        //     }
+        // });
     }
 
     const normalizePhoneNumber = (value) => {
-
-        
         return masks.phoneNumber.mask(value);
         // return value.replace(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im, "")
     }
@@ -104,9 +136,9 @@ const FormAdd = () => {
 
     return (
         <>
-        <h3 className="c-title c-title--h3">Добавить чек</h3>
+        <h3 className="c-title c-title--h3">Добавить купон</h3>
         <div className="c-grid c-grid--beetwen">
-            <div className="c-grid-col c-grid-col-6">
+            <div className="c-grid-col">
                 <form action="" className="c-form" onSubmit={handleSubmit(onSubmit)}>
                     <div className="c-form__item">
                         <label className="c-label" htmlFor="">Имя</label>
@@ -146,11 +178,11 @@ const FormAdd = () => {
                         {errors.userPhone && <span className="c-form-error">{errors?.userPhone?.message}</span>}
                     </div>
                     <div className="c-form__item">
-                        <label className="c-label" htmlFor="">Номер кассового чека</label>
+                        <label className="c-label" htmlFor="">Номер купона</label>
                         <input
-                            type="number"
+                            type="text"
                             ref={register}
-                            placeholder="000000"
+                            placeholder="0-000-000"
                             autoComplete="off"
                             inputMode="numeric"
                             className={errors.userNumber ? "c-input error" : "c-input"}
@@ -170,7 +202,7 @@ const FormAdd = () => {
                     </div>
                     <div className="c-form__item">
                     <div className="c-form-policy">
-                        Согласен с условиями <a className="c-link" href="https://pizzapresto.ru/confidentiality/" target="_blank">обработки персональных данных</a> и правилами розыгрыша.
+                        Согласие с условиями <a className="c-link" href="https://pizzapresto.ru/privacy" target="_blank">обработки персональных данных</a> и правилами розыгрыша.
                     </div>
                     </div>
                     <div className="c-form__item">
@@ -179,17 +211,21 @@ const FormAdd = () => {
                                 onClick={() => {
                                     clearErrors();                                    
                                 }}
+                                disabled={isLoading}
+                                style={{minWidth: "210px"}}
                                 className="c-btn large c-btn--primary"
-                            >Добавить</button>
+                            >
+                                <span>{isLoading ? "Отправление..." : "Добавить"}</span>
+                            </button>
                         </div>
                     </div>
                 </form>
             </div>    
-            <div className="c-grid-col c-grid-col-6">
-                <div className="c-form-img">
-                    <img src={imgCashReceipt} alt=""/>
-                </div>  
-            </div>    
+            {/*<div className="c-grid-col c-grid-col-6">*/}
+            {/*    <div className="c-form-img">*/}
+            {/*        <img src={imgCashReceipt} alt=""/>*/}
+            {/*    </div>  */}
+            {/*</div>    */}
         </div>
         
         </>

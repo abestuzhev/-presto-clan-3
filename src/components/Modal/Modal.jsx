@@ -4,7 +4,7 @@ const Modal = ({handleClose, children, history, closeBtn = true, size="small"}) 
     return (
         <>
         <div className="c-modal-component">
-            <div className="c-modal-layout" onClick={handleClose}></div>
+            <div className="c-modal-layout" onClick={() => history.push("/")}></div>
             <div className={size === "small"? "c-modal-wrapper c-modal-wrapper--small": "c-modal-wrapper"}>
                 <div className={size === "small"? "c-modal c-modal--small": "c-modal c-modal--large"}>
                     {closeBtn && <div className="c-modal-close" onClick={() => history.push("/")}>
