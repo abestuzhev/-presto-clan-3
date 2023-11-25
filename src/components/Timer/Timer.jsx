@@ -12,6 +12,12 @@ const Timer = () => {
         counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
     }, [counter]);
 
+    // useEffect( async () => {
+    //     counter === 20 && await api.initRepeat(data.uid).then( res => {
+    //          console.log("res", res)
+    //     });
+    // }, [counter])
+
     const sendSmsHandler = () => {
         //отправка кода SMS
         setShowNotify(true)

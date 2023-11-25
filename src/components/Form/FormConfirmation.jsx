@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 import { api } from "../../api/api";
 import { useData } from "../../DataContext";
 import Timer from "../Timer/Timer";
+import {useEffect} from "react";
+import {canObjectValues} from "../../helpers/functions";
 
 export const FormConfirmation = () => {
     const history = useHistory();
@@ -10,6 +12,10 @@ export const FormConfirmation = () => {
     const {register, handleSubmit, errors, clearErrors, } = useForm({
         mode: 'all',
     });
+
+    useEffect( () => {
+        !canObjectValues(data) && history.push('/');
+    }, [])
 
     const onSubmit = (values) => {
         

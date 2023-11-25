@@ -10,3 +10,11 @@ export const convertDateToString = (date) => {
     }
 
 }
+
+export const canObjectValues = (value) => {
+    return (!!value) && (value.constructor === Object) && Object.keys(value).length > 0
+}
+
+export const canArrayValues = (value) => {
+    return Array.isArray(value) && value.length > 0
+}

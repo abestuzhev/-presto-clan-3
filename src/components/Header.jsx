@@ -26,10 +26,10 @@ const Header = () => {
                         <a href="https://pizzapresto.ru" className="header-order">
                             <span>Сделать</span> заказ
                         </a>
-                        <Link to="/add/step-1" className="header-login">
-                            {/*<span className="header-login__icon"></span>*/}
-                            <div className="header-login__link">Регистрация <span>купона</span></div>
-                        </Link>
+                        {/*<Link to="/add/step-1" className="header-login">*/}
+                        {/*    /!*<span className="header-login__icon"></span>*!/*/}
+                        {/*    <div className="header-login__link">Регистрация <span>купона</span></div>*/}
+                        {/*</Link>*/}
                     </div>
                 </div>
 

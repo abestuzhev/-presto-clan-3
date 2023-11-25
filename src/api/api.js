@@ -23,9 +23,9 @@ export const api = {
             // response structure{
             //     "status": true,
             //         "ucaller_id": 21046728,
-            //         "phone": "7950***2664",
+            //         "phone": "7950***0001",
             //         "code": "9999",
-            //         "client": "Алексей"
+            //         "client": "name"
             // }
 
         }catch(e) {

@@ -14,7 +14,6 @@ import Home from "./components/Home";
 function App() {
     const match = useRouteMatch("/add");
     const history = useHistory();
-    console.log("match", match);
     return (
         <div className="app">
             <div className="wrapper">

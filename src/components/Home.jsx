@@ -52,11 +52,12 @@ const Home = () => {
                             </div>
 
                             <div className="home-banner__text">
-                                <p>Главный розыгрыш 23 февраля 2023 года.</p>
-                                <p>Регистрация купонов с 12 декабря 2022 года до 12 февраля 2023 года.</p>
-                                <p>
-                                    Собирай купоны и повышай свой шанс стать победителем!
-                                </p>
+                                <p>Не пропусти розыгрыш 23 февраля в 18:00 в прямом эфире <a href="https://vk.com/pizzapresto" className="c-link" target="_blank">ВКонтакте</a></p>
+                                {/*<p>Главный розыгрыш 23 февраля 2023 года.</p>*/}
+                                {/*<p>Регистрация купонов с 12 декабря 2022 года до 12 февраля 2023 года.</p>*/}
+                                {/*<p>*/}
+                                {/*    Собирай купоны и повышай свой шанс стать победителем!*/}
+                                {/*</p>*/}
                             </div>
                             {/*<button className="c-btn large c-btn--primary">Добавить</button>*/}
                         </div>
@@ -94,48 +95,53 @@ const Home = () => {
                     </div>
                     <div className="home-block">
                         <div className="home-rules">
-                            <div className="c-title">
-                                <h2>Как принять участие?</h2>
-                            </div>
-                            <div className="rules-list">
-                                <div className="rules-list__item">
-                                    <div className="rules-card">
-                                        <div className="rules-card__num">1</div>
-                                        <div className="rules-card__body">
-                                            <div className="rules-card__text c-text-medium">
-                                                Сделай заказ в нашей службе доставки на сумму от 1500 ₽
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="rules-list__item">
-                                    <div className="rules-card">
-                                        <div className="rules-card__num">2</div>
-                                        <div className="rules-card__body">
-                                            <div className="rules-card__text">
-                                                Сохрани кассовый чек и купон для участия в розыгрыше
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="rules-list__item">
-                                    <div className="rules-card">
-                                        <div className="rules-card__num">3</div>
-                                        <div className="rules-card__body">
-                                            <div className="rules-card__text">
-                                                Зарегистрируй номер купона на сайте
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            {/*<div className="c-title">*/}
+                            {/*    <h2>Как принять участие?</h2>*/}
+                            {/*</div>*/}
+                            {/*<div className="rules-list">*/}
+                            {/*    <div className="rules-list__item">*/}
+                            {/*        <div className="rules-card">*/}
+                            {/*            <div className="rules-card__num">1</div>*/}
+                            {/*            <div className="rules-card__body">*/}
+                            {/*                <div className="rules-card__text c-text-medium">*/}
+                            {/*                    Сделай заказ в нашей службе доставки на сумму от 1500 ₽*/}
+                            {/*                </div>*/}
+                            {/*            </div>*/}
+                            {/*        </div>*/}
+                            {/*    </div>*/}
+                            {/*    <div className="rules-list__item">*/}
+                            {/*        <div className="rules-card">*/}
+                            {/*            <div className="rules-card__num">2</div>*/}
+                            {/*            <div className="rules-card__body">*/}
+                            {/*                <div className="rules-card__text">*/}
+                            {/*                    Сохрани кассовый чек и купон для участия в розыгрыше*/}
+                            {/*                </div>*/}
+                            {/*            </div>*/}
+                            {/*        </div>*/}
+                            {/*    </div>*/}
+                            {/*    <div className="rules-list__item">*/}
+                            {/*        <div className="rules-card">*/}
+                            {/*            <div className="rules-card__num">3</div>*/}
+                            {/*            <div className="rules-card__body">*/}
+                            {/*                <div className="rules-card__text">*/}
+                            {/*                    Зарегистрируй номер купона на сайте*/}
+                            {/*                </div>*/}
+                            {/*            </div>*/}
+                            {/*        </div>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
                             <div className="rules-note">
                                 <div className="rules-note__text">
-                                    Не пропусти подведение итогов, которое пройдет 23 февраля 2023 года в онлайн-режиме в группе ВКонтакте.
-                                    С подробными условиями акции можно ознакомиться в нашем <a href={stockPositionPDF} className="c-link" target="_blank">Положении акции</a>
 
                                 </div>
                             </div>
+                            {/*<div className="rules-note">*/}
+                            {/*    <div className="rules-note__text">*/}
+                            {/*        Не пропусти подведение итогов, которое пройдет 23 февраля 2023 года в онлайн-режиме в группе ВКонтакте.*/}
+                            {/*        С подробными условиями акции можно ознакомиться в нашем <a href={stockPositionPDF} className="c-link" target="_blank">Положении акции</a>*/}
+
+                            {/*    </div>*/}
+                            {/*</div>*/}
                         </div>
                     </div>
 

@@ -97,13 +97,7 @@ const FormAdd = () => {
     const onSubmit = values => {
         // console.log("onSubmit", values);
         setIsLoading(true)
-        setValues({
-            user: {...values,
-                userNumber: String(values.userNumber).replace(/-/g, ''),
-                date: convertDateToString(new Date())
-            },
-            smsCode: smsCode,
-        });
+
 
         // console.log("userPhone", values.userPhone)
         // console.log("values.userName", values.userName)
@@ -111,9 +105,25 @@ const FormAdd = () => {
 
         //Отправка звонка
         api.initCall(values.userPhone, values.userName, smsCode).then( res => {
-            // const response = JSON.parse(res)
-            setIsLoading(false)
-            res.status ? history.push('/add/step-2') : history.push('/add/error');
+
+            // console.log("res", res)
+            if(res?.status) {
+                setValues({
+                    user: {...values,
+                        userNumber: String(values.userNumber).replace(/-/g, ''),
+                        date: convertDateToString(new Date())
+                    },
+                    smsCode: smsCode,
+                    uid: res?.ucaller_id
+                });
+
+                setIsLoading(false)
+                history.push('/add/step-2');
+            }else {
+                history.push('/add/error');
+            }
+
+            // res.status ? history.push('/add/step-2') : history.push('/add/error');
         });
 
         //Повтор звонка
