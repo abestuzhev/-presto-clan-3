@@ -63,7 +63,7 @@ export const api = {
 
     },
 
-    sendSms: ( smsPhone, smsCode ) => {
+    sendOldSms: ( smsPhone, smsCode ) => {
         const smsLogin = "pizzapresto";
         const smsPassword = "Presto*2020";
         const smsMessage = `${smsCode} — ваш одноразовый код подтверждения Клан Престо`;
@@ -76,7 +76,18 @@ export const api = {
 
         return instance.post('/sms/', formData).then(res => {
             return res.data;
-        });       
+        });
+    },
+    sendSms: ( smsPhone, smsCode ) => {
+        const smsMessage = `${smsCode} — ваш одноразовый код подтверждения Клан Престо`;
+
+        let formData = new FormData();
+            formData.append("smsPhone", smsPhone);
+            formData.append("smsMessage", smsMessage);
+
+        return instance.post('/newSms/', formData).then(res => {
+            return res.data?.response;
+        });
     },
 
     getCities: () => {
@@ -96,6 +107,6 @@ export const api = {
         //return status = true
         return instance.post("/add-user/", formData).then(res => {
             return res.data;
-        }) 
+        })
     }
 }

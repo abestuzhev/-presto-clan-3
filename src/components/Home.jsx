@@ -1,39 +1,41 @@
 import React from 'react';
-import ImgGiftIphone from "./../img/img-gift-iphone14.png";
-import ImgGiftWatch from "./../img/img-gift-watch-7.png";
-import ImgGiftHonor from "./../img/img-gift-station.png";
+import ImgGiftIphone from "./../img/img-gift-iphone15.png";
+import ImgGiftWatch from "./../img/img-gift-ps-5.png";
+import ImgGiftStation from "./../img/img-gift-station-3.png";
 import ImgGiftAirpods from "./../img/img-gift-airpods.png";
-import ImgPerson from "./../img/banner-person.png";
+import ImgPerson from "./../img/banner-person-2.png";
+import VideoStep1 from "./../video/step-1.mp4";
 
 import {Link} from "react-router-dom";
-import stockPositionPDF from "../doc/stock-position-3.0.pdf";
+import stockPositionPDF from "../doc/stock-position-4.0.pdf";
 
 const Home = () => {
     const gifts = [
         {
             id: 1,
-            title: "Смартфон Apple iPhone 14 Pro",
-            property: "256 Гб",
+            title: "Смартфон Apple iPhone 15",
+            property: "128 Гб",
             img: ImgGiftIphone,
             class: "gift-card gift-card--top"
         },
         {
             id: 2,
-            title: "Смарт-часы Apple Watch Series 7",
-            property: "41 мм",
+            title: "Игровая консоль PlayStation 5 ",
+            property: "Digital Edition",
             img: ImgGiftWatch,
-            class: "gift-card gift-card--bottom"
+            // class: "gift-card gift-card--top gift-card--ps"
+            class: "gift-card gift-card--bottom gift-card--ps"
         },
         {
             id: 3,
-            title: "Умная колонка Яндекс.Станция Мини",
+            title: "Умная колонка Яндекс.Станция Миди",
             property: "с часами",
-            img: ImgGiftHonor,
-            class: "gift-card gift-card--right"
+            img: ImgGiftStation,
+            class: "gift-card gift-card--top gift-card--station"
         },
         {
             id: 4,
-            title: "Наушники Apple AirPods Pro",
+            title: "Наушники Apple AirPods Pro 2 Type-C",
             property: "2",
             img: ImgGiftAirpods,
             class: "gift-card gift-card--bottom"
@@ -48,16 +50,16 @@ const Home = () => {
                         <div className="home-banner-body">
                             <div className="home-banner-body__head">
                                 <div className="home-banner__label">Декабрь — Февраль</div>
-                                <div className="home-banner__title">КЛАН ПРЕСТО. ВОЗВРАЩЕНИЕ</div>
+                                <div className="home-banner__title">КЛАН ПРЕСТО. НОВЫЙ СЕЗОН</div>
                             </div>
 
                             <div className="home-banner__text">
-                                <p>Не пропусти розыгрыш 23 февраля в 18:00 в прямом эфире <a href="https://vk.com/pizzapresto" className="c-link" target="_blank">ВКонтакте</a></p>
-                                {/*<p>Главный розыгрыш 23 февраля 2023 года.</p>*/}
-                                {/*<p>Регистрация купонов с 12 декабря 2022 года до 12 февраля 2023 года.</p>*/}
-                                {/*<p>*/}
-                                {/*    Собирай купоны и повышай свой шанс стать победителем!*/}
-                                {/*</p>*/}
+                                {/*<p>Не пропусти розыгрыш 23 февраля в 18:00 в прямом эфире <a href="https://vk.com/pizzapresto" className="c-link" target="_blank">ВКонтакте</a></p>*/}
+                                <p>Не пропусти розыгрыш 13 февраля 2024 года.</p>
+                                <p>Регистрация купонов по 06 февраля 2024 года.</p>
+                                <p>
+                                    Больше купонов — больше шансов стать победителем!
+                                </p>
                             </div>
                             {/*<button className="c-btn large c-btn--primary">Добавить</button>*/}
                         </div>
@@ -130,18 +132,24 @@ const Home = () => {
                             {/*        </div>*/}
                             {/*    </div>*/}
                             {/*</div>*/}
-                            <div className="rules-note">
-                                <div className="rules-note__text">
+                            {/*<div className="rules-video">*/}
+                            {/*    <video controls loop>*/}
+                            {/*        <source src={VideoStep1} type="video/mp4" />*/}
+                            {/*    </video>*/}
+                            {/*</div>*/}
 
-                                </div>
-                            </div>
                             {/*<div className="rules-note">*/}
                             {/*    <div className="rules-note__text">*/}
-                            {/*        Не пропусти подведение итогов, которое пройдет 23 февраля 2023 года в онлайн-режиме в группе ВКонтакте.*/}
-                            {/*        С подробными условиями акции можно ознакомиться в нашем <a href={stockPositionPDF} className="c-link" target="_blank">Положении акции</a>*/}
 
                             {/*    </div>*/}
                             {/*</div>*/}
+                            <div className="rules-note">
+                                <div className="rules-note__text">
+                                    Не пропусти подведение итогов, которое пройдет 13 февраля 2024 года в онлайн-режиме в группе ВКонтакте.
+                                    С подробными условиями акции можно ознакомиться в нашем <a href={stockPositionPDF} className="c-link" target="_blank">Положении акции</a>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
 

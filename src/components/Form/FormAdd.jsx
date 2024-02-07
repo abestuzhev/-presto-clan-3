@@ -18,7 +18,7 @@ const FormAdd = () => {
     const [isLoading, setIsLoading] = useState(false)
 
     const masks = {
-        
+
         code: {
             unmask: (value) => {
                 const mask = IMask.createPipe({
@@ -41,7 +41,7 @@ const FormAdd = () => {
 
             return mask(value);
             }
-        }, 
+        },
 
         phoneNumber: {
             unmask: (value) => {
@@ -51,10 +51,10 @@ const FormAdd = () => {
                     IMask.PIPE_TYPE.MASKED,
                     IMask.PIPE_TYPE.UNMASKED
                 );
-    
+
                 return mask(value);
             },
-    
+
             mask: (value) => {
                 const mask = IMask.createPipe({
                         mask: '+{7} (000) 000-00-00',
@@ -63,19 +63,19 @@ const FormAdd = () => {
                     // IMask.PIPE_TYPE.UNMASKED,
                     IMask.PIPE_TYPE.MASKED
                 );
-    
+
                 return mask(value);
             }
-        } 
+        }
 
-        
-        
+
+
     }
     // const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
     const schema = yup.object().shape({
         userName: yup.string().matches(/^([^0-9]*)$/, "В поле не должно быть цифр").required("Заполните имя").max(20, "Имя слишком длинное").min(3, "Имя слишком короткое"),
-        userPhone: yup.string().transform( value => {            
+        userPhone: yup.string().transform( value => {
             return masks.phoneNumber.unmask(value);
         }).min(11, "Телефон слишком короткий")
         .required("Введите номер телефона"),
@@ -98,33 +98,51 @@ const FormAdd = () => {
         // console.log("onSubmit", values);
         setIsLoading(true)
 
-
-        // console.log("userPhone", values.userPhone)
-        // console.log("values.userName", values.userName)
-        // console.log(smsCode, smsCode)
-
-        //Отправка звонка
-        api.initCall(values.userPhone, values.userName, smsCode).then( res => {
-
-            // console.log("res", res)
-            if(res?.status) {
+        //отправка кода SMS
+        api.sendSms(values.userPhone, smsCode).then( res => {
+            if(res?.msg?.text === 'OK') {
                 setValues({
                     user: {...values,
                         userNumber: String(values.userNumber).replace(/-/g, ''),
                         date: convertDateToString(new Date())
                     },
                     smsCode: smsCode,
-                    uid: res?.ucaller_id
                 });
-
                 setIsLoading(false)
                 history.push('/add/step-2');
             }else {
                 history.push('/add/error');
             }
-
-            // res.status ? history.push('/add/step-2') : history.push('/add/error');
         });
+
+        //Отправка звонка
+        // api.initCall(values.userPhone, values.userName, smsCode).then( res => {
+        //
+        //     // console.log("res", res)
+        //     if(res?.status) {
+        //         setValues({
+        //             user: {...values,
+        //                 userNumber: String(values.userNumber).replace(/-/g, ''),
+        //                 date: convertDateToString(new Date())
+        //             },
+        //             smsCode: smsCode,
+        //             uid: res?.ucaller_id
+        //         });
+        //
+        //         setIsLoading(false)
+        //         history.push('/add/step-2');
+        //     }else {
+        //         // api.initRepeat(res?.ucaller_id).then( res => {
+        //         //     console.log("res", res)
+        //         //     // const response = JSON.parse(res)
+        //         //     setIsLoading(false)
+        //         //     // response.status ? history.push('/add/step-2') : history.push('/add/error');
+        //         // });
+        //         history.push('/add/error');
+        //     }
+        //
+        //     // res.status ? history.push('/add/step-2') : history.push('/add/error');
+        // });
 
         //Повтор звонка
         // api.initRepeat(values.userPhone, values.userName, smsCode).then( res => {
@@ -134,14 +152,7 @@ const FormAdd = () => {
         //     // response.status ? history.push('/add/step-2') : history.push('/add/error');
         // });
 
-        //отправка кода SMS
-        // api.sendSms(values.userPhone, smsCode).then( res => {
-        //     if(res) {
-        //         history.push('/add/step-2');
-        //     }else {
-        //         history.push('/add/error');
-        //     }
-        // });
+
     }
 
     const normalizePhoneNumber = (value) => {
@@ -164,7 +175,7 @@ const FormAdd = () => {
                             type="text"
                             ref={register({required: true})}
                             autoComplete="off"
-                            className={errors.userName ? "c-input error" : "c-input"}                            
+                            className={errors.userName ? "c-input error" : "c-input"}
                             name="userName" />
                         {errors.userName && <span className="c-form-error">{errors?.userName?.message}</span>}
                     </div>
@@ -188,7 +199,7 @@ const FormAdd = () => {
                             // ref={register({required: true})}
                             rules={{ required: true }}
                             mask="+7 999 999-99-99"
-                            className={errors.userPhone ? "c-input error" : "c-input"}  
+                            className={errors.userPhone ? "c-input error" : "c-input"}
                             name="userNumber"
                             placeholder="+7 000 000-00-00"
                         /> */}
@@ -227,7 +238,7 @@ const FormAdd = () => {
                         <div className="c-btn-layout">
                             <button
                                 onClick={() => {
-                                    clearErrors();                                    
+                                    clearErrors();
                                 }}
                                 disabled={isLoading}
                                 style={{minWidth: "210px"}}
@@ -238,14 +249,14 @@ const FormAdd = () => {
                         </div>
                     </div>
                 </form>
-            </div>    
+            </div>
             {/*<div className="c-grid-col c-grid-col-6">*/}
             {/*    <div className="c-form-img">*/}
             {/*        <img src={imgCashReceipt} alt=""/>*/}
             {/*    </div>  */}
             {/*</div>    */}
         </div>
-        
+
         </>
     )
 }

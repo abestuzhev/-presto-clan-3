@@ -18,7 +18,6 @@ export const FormConfirmation = () => {
     }, [])
 
     const onSubmit = (values) => {
-        
         if(Number(values.userConfirmation) === data.smsCode){
             api.addUser(data).then( res => {
                 if(res){
@@ -27,7 +26,6 @@ export const FormConfirmation = () => {
                     history.push('/add/error');
                 }
             });
-            
         }else {
             history.push('/add/error');
         }
@@ -37,10 +35,10 @@ export const FormConfirmation = () => {
         <div className="confirmation">
             <h3 className="c-title c-title--h3">Код подтверждения</h3>
             <form action="" className="c-form" onSubmit={handleSubmit(onSubmit)}>
-                
+
                 <div className="c-form__item">
                     {/*<label className="c-label" htmlFor="">Код подтверждения </label>*/}
-                    <div className="c-label">Введите последние 4-е цифры номера телефона</div>
+                    <div className="c-label">Введите код из смс</div>
                     <input
                         type="number"
                         ref={register({required: true, minLength: 4, maxLength: 4, validate: (value) => { return Number(value) === data.smsCode}})}
@@ -49,21 +47,21 @@ export const FormConfirmation = () => {
                         inputMode="numeric"
                         className={errors.userConfirmation ? "c-input error" : "c-input"}
                         name="userConfirmation"
-                        // onChange={ event => {                            
+                        // onChange={ event => {
                         //     validateCode(event.target.value);
                         // }}
                     />
                     {errors.userConfirmation && <span className="c-form-error">Введите корректный код </span>}
                 </div>
-                <Timer />
+                {/*<Timer />*/}
                 <div className="c-form__item">
                     <div className="c-btn-layout">
-                       
+
                         <button
                             onClick={() => clearErrors()}
                             className="c-btn large c-btn--primary"
                         >Зарегистрировать купон</button>
-                        
+
                     </div>
                 </div>
             </form>

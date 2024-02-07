@@ -111,6 +111,15 @@
             &__num {
                 font-size: 24px;
             }
+
+            &::after {
+                content: '';
+                display: none;
+            }
+        }
+
+        &-video {
+            padding: 0;
         }
     }
 
@@ -205,6 +214,15 @@
             margin-right: -6px;
             &__item {
                 padding: 6px;
+            }
+        }
+
+        &-card {
+            border-radius: 0;
+            transition: auto;
+
+            &:hover {
+                transition: auto;
             }
         }
     }
